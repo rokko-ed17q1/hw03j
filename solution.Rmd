@@ -1,0 +1,61 @@
+---
+title: 'hw03j: ベクトルと行列'
+author: '氏名^[Affiliation]'
+date: '`r format(Sys.time(), "%Y/%m/%d")`'
+output:
+  bookdown::pdf_document2:
+    fig_caption: yes
+    includes:
+      in_header: 
+        - asset/latex/custom.sty
+        - asset/latex/luatexj.sty
+    keep_tex: no
+    latex_engine: lualatex
+    number_sections: yes
+    template: null
+    toc: no
+  bookdown::html_document2: default
+documentclass: scrartcl
+---
+
+```{r}
+source('R/matrix.R')
+```
+
+## スカラー {-}
+
+```{r, scalar}
+if (is_symmetric(1)) {
+  cat("Pass: Scalar")
+} else {
+  warning("Scalar not symmetric!")
+}
+```
+
+
+## 対称行列 {-}
+
+```{r, symmetric}
+A = matrix(rnorm(16), nrow = 4)
+S = (A + t(A)) / 2
+
+if (is_symmetric(S)) {
+  cat("Pass: Symmetric matrix")
+} else {
+  warning("Not working correctly for symmetric matrix.")
+}
+```
+
+
+## 非対称行列 {-}
+
+```{r, asymmetric}
+B = matrix(c(1, 0, 1, 1), nrow = 2)
+
+if (!is_symmetric(B)) {
+  cat("Pass: Non-symmetric matrix")
+} else {
+  warning("Not working correctly for non-symmetric matrix.")
+}
+```
+
